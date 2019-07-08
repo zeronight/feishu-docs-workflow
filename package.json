@@ -1,0 +1,19 @@
+{
+  "name": "feishu-docs-workflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "renderList.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "puppeteer-core": "^1.18.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
+  }
+}

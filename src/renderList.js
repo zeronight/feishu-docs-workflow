@@ -34,7 +34,6 @@ async function getStarList(keyword = '') {
   const { nodes: docs, users } = entities;
 
   return Object.values(docs).map((doc) => ({
-    uid: doc.obj_token,
     title: util.removeHtmlTag(doc.name),
     subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
     arg: doc.url,
@@ -58,7 +57,6 @@ async function search(query) {
   const { entities: { objs: docs } } = await fetchJson(api);
 
   return Object.values(docs).map((doc) => ({
-    uid: doc.token,
     title: util.removeHtmlTag(doc.title),
     subtitle: editInfo(doc.edit_name, doc.edit_time),
     arg: doc.url,
@@ -75,7 +73,6 @@ async function getRecentList() {
   const { nodes: docs, users } = entities;
 
   return Object.values(docs).sort((d1, d2) => d2.open_time - d1.open_time).map((doc) => ({
-    uid: doc.obj_token,
     title: util.removeHtmlTag(doc.name),
     subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
     arg: doc.url,
@@ -87,7 +84,6 @@ async function getRecentList() {
 
 function getLoginItem() {
   return [{
-    uid: env.customAction.login,
     title: '未登录',
     subtitle: '打开浏览器去登录',
     arg: env.customAction.login,

@@ -4,6 +4,7 @@
   "description": "",
   "main": "renderList.js",
   "scripts": {
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",

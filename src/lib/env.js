@@ -1,5 +1,5 @@
 module.exports = {
-  browserPath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  browserPath: process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
 
   authPage: 'https://bytedance.feishu.cn/space/home/',
 

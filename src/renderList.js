@@ -83,14 +83,29 @@ async function getRecentList() {
 }
 
 function getLoginItem() {
-  return [{
+  return {
     title: '未登录',
     subtitle: '打开浏览器去登录',
     arg: env.customAction.login,
     icon: {
       path: iconPath,
     },
-  }];
+  };
+}
+
+function removeUserData() {
+  return {
+    title: '清除个人信息',
+    subtitle: '清除个人登录信息',
+    arg: env.customAction.clear,
+    icon: {
+      path: iconPath,
+    },
+  };
+}
+
+function getSettingItems() {
+  return [getLoginItem(), removeUserData()];
 }
 
 function outputAlfredItems(items) {
@@ -100,12 +115,24 @@ function outputAlfredItems(items) {
 async function main() {
   const type = process.argv[2];
   const keyword = process.argv[3];
-  const fetchList = type === '--star' ? getStarList : (keyword ? search : getRecentList);
+
+  let generateItems;
+  switch (type) {
+    case '--favorite':
+      generateItems = getStarList;
+      break;
+    case '--setting':
+      generateItems = getSettingItems;
+      break;
+    default:
+      generateItems = keyword ? search : getRecentList;
+  }
+
   let items;
   try {
-    items = await fetchList(keyword);
+    items = await generateItems(keyword);
   } catch (e) {
-    items = getLoginItem();
+    items = [getLoginItem()];
   }
   outputAlfredItems(items);
 }

@@ -15,5 +15,6 @@ module.exports = {
 
   customAction: {
     login: 'custom://login',
+    clear: 'custom://clear',
   },
 };

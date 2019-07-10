@@ -16,4 +16,8 @@ module.exports = {
     const base64 = await fsp.readFile(env.database, encoding);
     return parse(base64);
   },
+
+  async delete() {
+    await fsp.unlink(env.database);
+  },
 };

@@ -29,11 +29,28 @@ async function fetchJson(api) {
   return data.data;
 }
 
+function buildItemArg(type, arg) {
+  return [type, arg].join(',');
+}
+
+function buildDocItemArg(doc) {
+  return {
+    ...doc,
+    arg: buildItemArg(env.actionType.open, doc.arg),
+    mods: {
+      cmd: {
+        arg: buildItemArg(env.actionType.copy, doc.arg),
+        subtitle: '复制文档链接',
+      },
+    },
+  };
+}
+
 async function getStarList(keyword = '') {
   const { entities } = await fetchJson(env.api.star);
   const { nodes: docs, users } = entities;
 
-  return Object.values(docs).map((doc) => ({
+  return Object.values(docs).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.name),
     subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
     arg: doc.url,
@@ -56,7 +73,7 @@ async function search(query) {
   const api = getSearchApi(query);
   const { entities: { objs: docs } } = await fetchJson(api);
 
-  return Object.values(docs).map((doc) => ({
+  return Object.values(docs).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.title),
     subtitle: editInfo(doc.edit_name, doc.edit_time),
     arg: doc.url,
@@ -72,7 +89,7 @@ async function getRecentList() {
   const { entities } = await fetchJson(uri.toString());
   const { nodes: docs, users } = entities;
 
-  return Object.values(docs).sort((d1, d2) => d2.open_time - d1.open_time).map((doc) => ({
+  return Object.values(docs).sort((d1, d2) => d2.open_time - d1.open_time).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.name),
     subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
     arg: doc.url,
@@ -86,7 +103,7 @@ function getLoginItem() {
   return {
     title: '登录授权',
     subtitle: '打开浏览器去登录',
-    arg: env.customAction.login,
+    arg: buildItemArg(env.actionType.setting, 'login'),
     icon: {
       path: iconPath,
     },
@@ -95,9 +112,9 @@ function getLoginItem() {
 
 function removeUserData() {
   return {
-    title: '清除个人信息',
+    title: '退出登录',
     subtitle: '清除个人登录信息',
-    arg: env.customAction.clear,
+    arg: buildItemArg(env.actionType.setting, 'logout'),
     icon: {
       path: iconPath,
     },

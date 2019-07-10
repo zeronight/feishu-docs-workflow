@@ -13,8 +13,9 @@ module.exports = {
     recent: 'https://internal-api.feishu.cn/space/api/explorer/recent/list/',
   },
 
-  customAction: {
-    login: 'custom://login',
-    clear: 'custom://clear',
+  actionType: {
+    setting: 'setting',
+    open: 'open',
+    copy: 'copy',
   },
 };

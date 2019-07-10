@@ -3,7 +3,7 @@ const db = require('./lib/db');
 
 const actions = {
   login: '--login',
-  clear: '--clear',
+  logout: '--logout',
 };
 
 async function login() {
@@ -18,7 +18,7 @@ async function login() {
   return hasError ? '登录失败' : '登录成功';
 }
 
-async function clear() {
+async function logout() {
   let hasError;
   try {
     await db.delete();
@@ -26,7 +26,7 @@ async function clear() {
     hasError = true;
   }
 
-  return hasError ? '清理失败' : '清理成功';
+  return hasError ? '注销失败' : '注销成功';
 }
 
 async function main() {
@@ -36,8 +36,8 @@ async function main() {
     case actions.login:
       tip = await login();
       break;
-    case actions.clear:
-      tip = await clear();
+    case actions.logout:
+      tip = await logout();
       break;
     default:
       tip = '未知操作';

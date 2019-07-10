@@ -84,7 +84,7 @@ async function getRecentList() {
 
 function getLoginItem() {
   return {
-    title: '未登录',
+    title: '登录授权',
     subtitle: '打开浏览器去登录',
     arg: env.customAction.login,
     icon: {

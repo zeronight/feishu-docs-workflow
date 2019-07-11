@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'none',
+  mode: 'production',
   entry: {
     list: './src/renderList.js',
     setting: './src/setting.js',

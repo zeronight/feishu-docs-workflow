@@ -4,7 +4,8 @@
   "description": "",
   "main": "renderList.js",
   "scripts": {
-    "build": "webpack"
+    "build": "bash ./script/build.sh",
+    "clear": "rm -rf dist"
   },
   "keywords": [],
   "author": "",

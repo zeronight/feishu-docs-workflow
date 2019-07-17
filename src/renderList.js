@@ -69,11 +69,27 @@ function getSearchApi(query) {
   return uri.toString();
 }
 
+const compareOpenTime = (doc1, doc2) => doc2.open_time - doc1.open_time;
+const isMatched = (text) => /<em>.+<\/em>/i.test(text);
+const compareSearchItem = (doc1, doc2) => {
+  const isTitleMatched = isMatched(doc2.title);
+  if (isTitleMatched !== isMatched(doc1.title)) {
+    return isTitleMatched ? 1 : -1;
+  }
+
+  const isPreviewMatched = isMatched(doc2.preview);
+  if (isPreviewMatched !== isMatched(doc1.preview)) {
+    return isPreviewMatched ? 1 : -1;
+  }
+
+  return compareOpenTime(doc1, doc2);
+};
+
 async function search(query) {
   const api = getSearchApi(query);
   const { entities: { objs: docs } } = await fetchJson(api);
 
-  return Object.values(docs).map((doc) => buildDocItemArg({
+  return Object.values(docs).sort(compareSearchItem).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.title),
     subtitle: editInfo(doc.edit_name, doc.edit_time),
     arg: doc.url,
@@ -89,7 +105,7 @@ async function getRecentList() {
   const { entities } = await fetchJson(uri.toString());
   const { nodes: docs, users } = entities;
 
-  return Object.values(docs).sort((d1, d2) => d2.open_time - d1.open_time).map((doc) => buildDocItemArg({
+  return Object.values(docs).sort(compareOpenTime).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.name),
     subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
     arg: doc.url,

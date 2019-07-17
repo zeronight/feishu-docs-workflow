@@ -147,7 +147,7 @@ function outputAlfredItems(items) {
 
 async function main() {
   const type = process.argv[2];
-  const keyword = process.argv[3];
+  const keyword = process.argv.slice(3).join(' ');
 
   let generateItems;
   switch (type) {

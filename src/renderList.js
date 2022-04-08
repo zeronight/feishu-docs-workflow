@@ -10,6 +10,19 @@ const iconPath = './icon.png';
 
 const editInfo = (name, time) => `${name}在 ${util.formatTime(time)} 更新过`;
 
+const getDocUrl = (doc) => {
+  let url = doc.url;
+  if (doc.wiki_infos && doc.wiki_infos.length > 0) {
+    for (const info of doc.wiki_infos) {
+      if (info.wiki_url) {
+        url = info.wiki_url;
+        break;
+      }
+    }
+  };
+  return url;
+}
+
 async function getCookie() {
   const cookies = await db.read();
   return cookies.map(c => `${c.name}=${c.value};`).join(' ');
@@ -92,7 +105,7 @@ async function search(query) {
   return Object.values(docs).sort(compareSearchItem).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.title),
     subtitle: editInfo(doc.edit_name, doc.edit_time),
-    arg: doc.url,
+    arg: getDocUrl(doc),
     icon: {
       path: iconPath,
     },
@@ -108,7 +121,7 @@ async function getRecentList() {
   return Object.values(docs).sort(compareOpenTime).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.name),
     subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
-    arg: doc.url,
+    arg: getDocUrl(doc),
     icon: {
       path: iconPath,
     },

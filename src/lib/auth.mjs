@@ -1,7 +1,7 @@
-const puppeteer = require('puppeteer-core');
-const env = require('./env');
+import puppeteer from 'puppeteer-core';
+import env from './env.mjs';
 
-async function getCookies () {
+export async function getCookies () {
   const browser = await puppeteer.launch({
     headless: false,
     defaultViewport: null,
@@ -15,5 +15,3 @@ async function getCookies () {
   await browser.close();
   return cookies;
 }
-
-module.exports = getCookies;

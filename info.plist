@@ -613,7 +613,7 @@ Readme: https://github.com/zeronight/feishu-docs-workflow</string>
 		<string>/usr/local/bin/node</string>
 	</dict>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>https://zeronight.github.io/</string>
 </dict>

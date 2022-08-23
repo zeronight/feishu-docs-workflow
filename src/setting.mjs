@@ -1,5 +1,5 @@
-const getCookies = require('./lib/auth');
-const db = require('./lib/db');
+import { getCookies } from './lib/auth.mjs';
+import db from './lib/db.mjs';
 
 const actions = {
   login: '--login',

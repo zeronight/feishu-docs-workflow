@@ -1,9 +1,8 @@
-const fetchModule = require('node-fetch');
-const util = require('./lib/util');
-const db = require('./lib/db');
-const env = require('./lib/env')
+import fetch from 'node-fetch';
 
-const fetch = fetchModule.default || fetchModule;
+import * as util from './lib/util.mjs';
+import db from './lib/db.mjs';
+import env from './lib/env.mjs';
 
 const count = 20;
 const iconPath = './icon.png';
@@ -47,13 +46,13 @@ function buildDocItemArg(doc) {
 }
 
 async function getStarList(keyword = '') {
-  const { entities } = await fetchJson(env.api.star);
+  const { entities, node_list: doc_ids } = await fetchJson(env.api.star);
   const { nodes: docs, users } = entities;
 
-  return Object.values(docs).map((doc) => buildDocItemArg({
-    title: util.removeHtmlTag(doc.name),
-    subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
-    arg: doc.url,
+  return doc_ids.map((id) => buildDocItemArg({
+    title: util.removeHtmlTag(docs[id].name),
+    subtitle: editInfo(users[docs[id].edit_uid].cn_name, docs[id].edit_time),
+    arg: docs[id].url,
     icon: {
       path: iconPath,
     },
@@ -87,12 +86,12 @@ const compareSearchItem = (doc1, doc2) => {
 
 async function search(query) {
   const api = getSearchApi(query);
-  const { entities: { objs: docs } } = await fetchJson(api);
+  const { entities: { objs: docs }, tokens: ids } = await fetchJson(api);
 
-  return Object.values(docs).sort(compareSearchItem).map((doc) => buildDocItemArg({
-    title: util.removeHtmlTag(doc.title),
-    subtitle: editInfo(doc.edit_name, doc.edit_time),
-    arg: doc.url,
+  return ids.map((id) => buildDocItemArg({
+    title: util.removeHtmlTag(docs[id].title),
+    subtitle: editInfo(docs[id].edit_name, docs[id].edit_time),
+    arg: docs[id].url ? docs[id].url : docs[id].wiki_infos?.[0]?.wiki_url,
     icon: {
       path: iconPath,
     },

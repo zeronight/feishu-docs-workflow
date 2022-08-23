@@ -1,8 +1,8 @@
 module.exports = {
   mode: 'production',
   entry: {
-    list: './src/renderList.js',
-    setting: './src/setting.js',
+    list: './src/renderList.mjs',
+    setting: './src/setting.mjs',
   },
   target: 'node',
 };

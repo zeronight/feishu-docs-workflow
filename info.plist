@@ -226,7 +226,7 @@
 				<key>runningsubtext</key>
 				<string>加载中...</string>
 				<key>script</key>
-				<string>$NODE_PATH list.js --favorite {query}</string>
+				<string>$NODE_PATH src/renderList.mjs --favorite {query}</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -304,7 +304,7 @@
 				<key>runningsubtext</key>
 				<string>加载中...</string>
 				<key>script</key>
-				<string>$NODE_PATH list.js --search {query}</string>
+				<string>$NODE_PATH src/renderList.mjs --search {query}</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -428,7 +428,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>$NODE_PATH setting.js --{query}</string>
+				<string>$NODE_PATH src/setting.mjs --{query}</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -492,7 +492,7 @@
 				<key>runningsubtext</key>
 				<string>加载中...</string>
 				<key>script</key>
-				<string>$NODE_PATH list.js --setting {query}</string>
+				<string>$NODE_PATH src/renderList.mjs --setting {query}</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -613,7 +613,7 @@ Readme: https://github.com/zeronight/feishu-docs-workflow</string>
 		<string>/usr/local/bin/node</string>
 	</dict>
 	<key>version</key>
-	<string>2.0.0</string>
+	<string>2.1.0</string>
 	<key>webaddress</key>
 	<string>https://zeronight.github.io/</string>
 </dict>

@@ -1,7 +1,3 @@
-webpack
+#!/bin/zsh
 
-cp info.plist src/icon/icon.png dist
-
-cd dist
-
-zip docs.alfredworkflow *.js icon.png info.plist
+zip docs.alfredworkflow src/**/* node_modules/**/* icon.png info.plist

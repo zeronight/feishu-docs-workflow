@@ -1,21 +1,16 @@
 {
   "name": "feishu-docs-workflow",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "",
   "main": "renderList.js",
   "scripts": {
-    "build": "bash ./script/build.sh",
-    "clear": "rm -rf dist"
+    "build": "./script/build.sh",
+    "clear": "rm -rf docs.alfredworkflow"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^3.2.10",
     "puppeteer-core": "^16.2.0"
-  },
-  "devDependencies": {
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
   }
 }

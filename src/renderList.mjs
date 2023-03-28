@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 import * as util from './lib/util.mjs';
 import db from './lib/db.mjs';
 import env from './lib/env.mjs';

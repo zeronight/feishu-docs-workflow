@@ -6,7 +6,7 @@ Feishu-Docs-workflow 是一个用于搜索飞书文档的 alfred workflow。
 
 ## 安装
 
-0. 安装 nodejs 和 chrome/chromium
+0. 安装 nodejs（版本不能低于 18.0.0）和 chrome/chromium
 
 1. 在[这里](https://github.com/zeronight/feishu-docs-workflow/releases)下载最新的 Feishu-Docs-workflow
 
